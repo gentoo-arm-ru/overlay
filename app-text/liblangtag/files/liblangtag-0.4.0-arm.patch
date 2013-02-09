@@ -1,0 +1,10 @@
+--- liblangtag-0.4.0/liblangtag/lt-messages.h.old	2013-02-08 14:30:13.215021140 +0400
++++ liblangtag-0.4.0/liblangtag/lt-messages.h	2013-02-08 14:30:24.665021273 +0400
+@@ -19,6 +19,7 @@
+ #include "config.h"
+ #include <stdarg.h>
+ #include "lt-macros.h"
++#include <signal.h>
+ 
+ LT_BEGIN_DECLS
+ 

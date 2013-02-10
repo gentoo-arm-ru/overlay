@@ -124,7 +124,7 @@ src_configure() {
 		$(use_enable doc gtk-doc) \
 		$(use_enable openvg vg) \
 		$(use_enable opengl gl) \
-		$(use_enable gles2) \
+		$(use_enable gles2 glesv2) \
 		$(use_enable qt4 qt) \
 		$(use_enable static-libs static) \
 		$(use_enable svg) \

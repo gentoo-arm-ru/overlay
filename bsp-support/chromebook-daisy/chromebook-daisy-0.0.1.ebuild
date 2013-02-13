@@ -17,8 +17,10 @@ RDEPEND="
 	sys-kernel/mfc-fw
 	media-libs/openmax-daisy
 	sys-kernel/exynos-pre-boot
-	x11-drivers/xf86-video-armsoc
+	x11-drivers/xf86-video-armsoc[-vanilla]
 "
+
+S="${WORKDIR}"
 
 src_install() {
 	# Install platform specific config file for power_manager
@@ -33,7 +35,7 @@ src_install() {
 	doins "${FILESDIR}/usb-autosuspend.conf" || die "installation failed ($?)"
 	doins "${FILESDIR}/cpufreq.conf" || die "installation failed ($?)"
 
-	insinto /etc/udev/rules.d
+	insinto "/lib/udev/rules.d"
 	doins "${FILESDIR}"/50-media.rules
 
 	if use snow; then

@@ -354,7 +354,7 @@ src_configure() {
 
 			if [ "${neon_used}" ]; then
 				myconf+=" -Darm_neon=1 "
-				myconf+=" -Denable_svg=0 " # FTBS on arm without it
+				myconf+=" -Denable_svg=1 " # FTBS on arm without it
 			else
 				fpu="${fpu:-vfpv3-d16}" # vfpv3-d16 is avaliable on almost all armv7
 				myconf+=" -Darm_neon=0 "

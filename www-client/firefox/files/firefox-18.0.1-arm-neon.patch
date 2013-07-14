@@ -1,0 +1,49 @@
+--- media/webrtc/trunk/src/modules/audio_processing/aecm/aecm.gypi.bak	2013-02-11 16:46:41.355066324 +0400
++++ media/webrtc/trunk/src/modules/audio_processing/aecm/aecm.gypi	2013-02-11 16:47:03.445067013 +0400
+@@ -32,7 +32,7 @@
+       ],
+       'conditions': [
+         ['target_arch=="arm" and armv7==1', {
+-          'dependencies': [ 'aecm_neon', ],
++          'dependencies': [ 'aecm_neon', ]
+         }],
+       ],
+     },
+--- media/webrtc/shared_libs.mk.old	2013-02-11 11:06:44.410056567 +0400
++++ media/webrtc/shared_libs.mk	2013-02-11 11:07:42.905057189 +0400
+@@ -49,6 +49,13 @@
+   $(call EXPAND_LIBNAME_PATH,aec_sse2,$(DEPTH)/media/webrtc/trunk/src/modules/modules_aec_sse2) \
+   $(NULL)
+ endif
++
++# neon for ARM
++ifeq ($(HAVE_ARM_NEON),1)
++WEBRTC_LIBS += \
++  $(call EXPAND_LIBNAME_PATH,aecm_neon,$(DEPTH)/media/webrtc/trunk/src/modules/modules_aecm_neon) \
++  $(NULL)
++endif
+ # If you enable one of these codecs in webrtc_config.gypi, you'll need to re-add the
+ # relevant library from this list:
+ #
+--- media/webrtc/trunk/src/build/arm_neon.gypi.bak	2013-02-11 16:47:12.465066262 +0400
++++ media/webrtc/trunk/src/build/arm_neon.gypi	2013-02-11 16:47:59.935066081 +0400
+@@ -25,11 +25,19 @@
+       'cflags!': [
+         '-mfpu=vfpv3-d16',
+       ],
++      'cflags_mozilla!': [
++        '-mfpu=vfpv3-d16',
++      ],
+       'cflags': [
+         '-mfpu=neon',
+         '-mfloat-abi=softfp',
+         '-flax-vector-conversions',
+       ],
++      'cflags_mozilla': [
++        '-mfpu=neon',
++        '-mfloat-abi=softfp',
++        '-flax-vector-conversions',
++      ]
+     }],
+   ],
+ }

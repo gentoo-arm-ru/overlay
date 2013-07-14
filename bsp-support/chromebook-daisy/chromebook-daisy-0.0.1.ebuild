@@ -17,7 +17,7 @@ RDEPEND="
 	sys-kernel/mfc-fw
 	media-libs/openmax-daisy
 	sys-kernel/exynos-pre-boot
-	x11-drivers/xf86-video-armsoc[-vanilla]
+	x11-drivers/xf86-video-armsoc
 "
 
 S="${WORKDIR}"

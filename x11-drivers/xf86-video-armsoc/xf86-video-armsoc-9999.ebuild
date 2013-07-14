@@ -3,7 +3,7 @@
 # $Header:  Exp $
 
 EAPI=5
-inherit git-2 xorg-2
+inherit git-2 eutils xorg-2
 
 DESCRIPTION="Generic VESA video driver"
 KEYWORDS="-*"
@@ -19,7 +19,31 @@ else
 fi
 
 src_prepare() {
-	use vanilla || epatch "${FILESDIR}/0001-copy-paste-from-omap-driver-to-get-it-compiled.patch"
+#	use vanilla || epatch "${FILESDIR}/0001-copy-paste-from-omap-driver-to-get-it-compiled.patch"
 
 	xorg-2_src_prepare
+}
+
+src_configure() {
+	if use vanilla; then
+		econf --with-drmmode=exynos
+	else
+		xorg-2_src_configure
+	fi
+}
+
+src_compile() {
+	if use vanilla; then
+		emake
+	else
+		xorg-2_src_compile
+	fi
+}
+
+src_install() {
+	if use vanilla; then
+		emake DESTDIR="${D}" install
+	else
+		xorg-2_src_install
+	fi
 }

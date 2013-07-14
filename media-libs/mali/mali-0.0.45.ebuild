@@ -9,7 +9,7 @@ inherit eutils
 OPENGL_DIR="mali"
 
 MY_PV="${PV/0./}"
-MY_PV_FULL="${MY_PV}-r96"
+MY_PV_FULL="${MY_PV}-r106"
 MY_PN="${PN}-drivers"
 MY_P="${MY_PN}-${MY_PV_FULL}"
 

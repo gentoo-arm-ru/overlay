@@ -41,3 +41,22 @@ diff -ur xf86-video-armsoc-9999~/src/omap_driver.h xf86-video-armsoc-9999/src/om
  	xf86SetBackingStore(pScreen);
  
  	/* Cause the cursor position to be updated by the mouse signal handler: */
+--- xf86-video-armsoc-9999/configure.ac~	2013-08-31 23:28:57.370000576 +0400
++++ xf86-video-armsoc-9999/configure.ac	2013-08-31 23:30:07.005000610 +0400
+@@ -55,13 +55,9 @@
+ CFLAGS="$XORG_CFLAGS $DRI_CFLAGS $DRM_CFLAGS"
+ CPPFLAGS="$XORG_CFLAGS $DRI_CFLAGS $DRM_CFLAGS"
+ AC_MSG_CHECKING([whether to include DRI support])
+-if test x$DRI != xno; then
+-        AC_CHECK_HEADER([${sdkdir}/dri.h],
+-                      [have_dri_h="yes"], [have_dri_h="no"])
+-        AC_CHECK_HEADER([${sdkdir}/dristruct.h],
+-                      [have_dristruct_h="yes"], [have_dristruct_h="no"])
+-fi
+-AC_MSG_CHECKING([whether to include DRI support])
++DRI=yes
++have_dri_h=yes
++have_dristruct_h=yes
+ if test x$DRI = xauto; then
+         if test "$have_dri_h" = yes -a \
+                 "$have_dristruct_h" = yes; then

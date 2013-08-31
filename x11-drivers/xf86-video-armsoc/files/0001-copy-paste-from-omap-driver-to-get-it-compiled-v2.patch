@@ -1,0 +1,43 @@
+diff -ur xf86-video-armsoc-9999~/src/drmmode_display.c xf86-video-armsoc-9999/src/drmmode_display.c
+--- xf86-video-armsoc-9999~/src/drmmode_display.c	2013-08-31 16:50:49.490232583 +0400
++++ xf86-video-armsoc-9999/src/drmmode_display.c	2013-08-31 17:03:08.915232935 +0400
+@@ -58,9 +58,6 @@
+ #include "compiler.h"
+ #include "mipointer.h"
+ 
+-/* All drivers implementing backing store need this */
+-#include "mibstore.h"
+-
+ #include "micmap.h"
+ 
+ #include "xf86DDC.h"
+@@ -1540,8 +1537,6 @@
+ 
+ 	TRACE_ENTER();
+ 
+-	pScrn->canDoBGNoneRoot = TRUE;
+-
+ 	drmmode = calloc(1, sizeof *drmmode);
+ 	drmmode->fd = fd;
+ 
+diff -ur xf86-video-armsoc-9999~/src/omap_driver.h xf86-video-armsoc-9999/src/omap_driver.h
+--- xf86-video-armsoc-9999~/src/omap_driver.h	2013-08-31 16:50:49.490232583 +0400
++++ xf86-video-armsoc-9999/src/omap_driver.h	2013-08-31 17:03:22.215232942 +0400
+@@ -40,7 +40,6 @@
+  * XXX - figure out what can be removed..
+  */
+ #include "mipointer.h"
+-#include "mibstore.h"
+ #include "micmap.h"
+ #include "colormapst.h"
+ #include "xf86cmap.h"
+--- a/src/omap_driver.c
++++ b/src/omap_driver.c
+@@ -760,7 +760,6 @@
+ 	OMAPAccelInit(pScreen);
+ 
+ 	/* Initialize backing store: */
+-	miInitializeBackingStore(pScreen);
+ 	xf86SetBackingStore(pScreen);
+ 
+ 	/* Cause the cursor position to be updated by the mouse signal handler: */

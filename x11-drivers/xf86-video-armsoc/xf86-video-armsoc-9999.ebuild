@@ -7,25 +7,25 @@ inherit git-2 eutils xorg-2
 
 DESCRIPTION="Generic VESA video driver"
 KEYWORDS="-*"
-IUSE="-vanilla"
+IUSE="+linaro"
 
 RDEPEND=">=x11-base/xorg-server-1.10.99"
 DEPEND="${RDEPEND}"
 
-if ! use vanilla; then
+if ! use linaro; then
 	EGIT_REPO_URI="https://git.chromium.org/git/chromiumos/third_party/${PN}.git"
 else
 	EGIT_REPO_URI="git://git.linaro.org/arm/xorg/driver/${PN}.git"
 fi
 
 src_prepare() {
-#	use vanilla || epatch "${FILESDIR}/0001-copy-paste-from-omap-driver-to-get-it-compiled.patch"
+	use linaro || epatch "${FILESDIR}/0001-copy-paste-from-omap-driver-to-get-it-compiled-v2.patch"
 
 	xorg-2_src_prepare
 }
 
 src_configure() {
-	if use vanilla; then
+	if use linaro; then
 		econf --with-drmmode=exynos
 	else
 		xorg-2_src_configure
@@ -33,7 +33,7 @@ src_configure() {
 }
 
 src_compile() {
-	if use vanilla; then
+	if use linaro; then
 		emake
 	else
 		xorg-2_src_compile
@@ -41,7 +41,7 @@ src_compile() {
 }
 
 src_install() {
-	if use vanilla; then
+	if use linaro; then
 		emake DESTDIR="${D}" install
 	else
 		xorg-2_src_install
